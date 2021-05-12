@@ -1,0 +1,18 @@
+{
+  "name": "react-single-date-picker",
+  "version": "1.0.0",
+  "description": "Date picker for select single day",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "webster6667",
+  "license": "MIT",
+  "dependencies": {
+    "bem-components-connector": "^1.0.1",
+    "camel-to-dash": "^1.0.1",
+    "date-helper-js": "^1.0.1",
+    "react": "^17.0.2"
+  }
+}

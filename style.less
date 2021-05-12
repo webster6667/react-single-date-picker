@@ -1,0 +1,142 @@
+.single-date-picker {
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: 0 5px 30px rgba(0,0,0,.3);
+
+
+  //Навигация + дни недели
+  &__header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  //Стрелки с месяцем
+  &__nav {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+  }
+
+  //Открытый месяц
+  &__open-date {
+    display: flex;
+    margin: 0 auto;
+
+    //Имя месяца и год
+    span {
+      align-items: center;
+      justify-content: center;
+      margin: 0 2px;
+
+      font-size: 12px;
+      color: black;
+    }
+
+  }
+
+  //Стрелки
+  &__arrow {
+    position: relative;
+
+    @size: 20px;
+    width: @size;
+    height: @size;
+
+    cursor: pointer;
+
+    //Сами стрелки
+    svg {
+      width: 10px;
+      fill: slategrey;
+    }
+
+    &:hover svg {
+      fill: black;
+    }
+
+    &_left {
+
+      svg {
+        transform: rotate(180deg);
+        transform-origin: center;
+      }
+      
+      &:hover {
+        transform: translateX(-1px);
+      }
+
+    }
+
+    &_right:hover {
+        transform: translateX(1px);
+    }
+  }
+
+  //Строка с днями недели
+  &__header-row {
+    display: flex;
+
+    padding: 5px 0;
+  }
+
+  //Ячейка дня недели
+  &__day-of-week {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @size: 25px;
+    width: @size;
+    height: @size;
+    margin: 1px;
+
+    color: silver;
+    font-size: 9px;
+  }
+
+  //Таблица с датами
+  &__table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  //Строки ячеек
+  &__date-row {
+    display: flex;
+  }
+
+  //Ячейка
+  &__date-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @size: 25px;
+    width: @size;
+    height: @size;
+
+    margin: 1px;
+
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover:not(&_selected) {
+      border: 2px solid silver;
+      border-radius: 50%;
+    }
+
+    &_prev, &_next {
+      opacity: .5;
+    }
+
+    //Выделенная ячейка
+    &_selected {
+      cursor: auto;
+      border-radius: 50%;
+      border: 2px solid #d8d7d7;
+      background-color: #d8d7d7;
+    }
+
+  }
+
+}
