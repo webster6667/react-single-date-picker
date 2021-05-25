@@ -1,5 +1,5 @@
 <p align="center" style="text-align:center">
-    <img src="./readme/illustration.svg" alt="illustration" width="100"/>
+    <img src="./illustration.svg" alt="illustration" width="100"/>
 </p>
 
 # react-single-date-picker
