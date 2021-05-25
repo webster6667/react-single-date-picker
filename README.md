@@ -1,11 +1,11 @@
 <p align="center" style="text-align:center">
-    <img src="./readme/ilustration.svg" alt="drawing" width="100"/>
+    <img src="./readme/illustration.svg" alt="illustration" width="100"/>
 </p>
 
 # react-single-date-picker
 Date picker for select single day.
 Has many hooks for implementation business logic.
-Has the ability change nav layout
+Has the ability change nav and cell layout
 
 
 ## Install

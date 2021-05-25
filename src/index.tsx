@@ -1,4 +1,6 @@
-import {FC, ReactElement, useState} from "react";
+import React, {FC, ReactElement, useState} from "react";
+import ReactDOM from 'react-dom'
+
 import {blockClassesConcat, bemClassName, elementClassesConcat} from 'bem-components-connector'
 import {
     getFirstDateOfMonth,
@@ -7,12 +9,12 @@ import {
     getNextMonth,
     getPrevMonth,
     getDayOfWeekNumber,
-    getDateNumber,
-    getMonthDateByDateNumber,
+    getDayOfMonthNumber,
+    getDateByDayOfMonthNumber,
     isDatesEqual
 } from 'date-helper-js'
 
-import {ReactComponent as SvgArrow} from './img/arrow.svg'
+import SvgArrow from './img/arrow.svg'
 
 import './style.less'
 
@@ -129,7 +131,7 @@ const pushCellsToTable = (cellContentLayout: (hookData:HookProps) => ReactElemen
             Array(monthDaysCount).fill('').forEach((_, key: number) => {
                 let iterationStep = ++key,
                     dateNumber = dayForStartIteration ? dayForStartIteration + iterationStep : iterationStep,
-                    cellDate = getMonthDateByDateNumber(pushMonth, dateNumber),
+                    cellDate =  getDateByDayOfMonthNumber(pushMonth, dateNumber),
                     isSelectedCell: boolean = selectedDate !== null ? isDatesEqual(cellDate, selectedDate) : false,
                     cellClasses = elementClassesConcat(block(), 'date-cell',{[cellModifier]: Boolean(cellModifier), selected: isSelectedCell}),
                     hookData = {monthStatus, cellDate, selectedDate, dateNumber},
@@ -176,14 +178,14 @@ const pushCellsToTable = (cellContentLayout: (hookData:HookProps) => ReactElemen
 }
 
 const DateTable = ({openMonthDate, selectedDate, setSelectedDate, cellContentLayout, beforeCellClick, afterCellClick}:DateTableProps) => {
-    
+
     //Пред месяц
     const prevMonth = getPrevMonth(openMonthDate),
           nextMonth = getNextMonth(openMonthDate)
 
     //Последнее число(type Data, type Number) предыдущего месяца
     const lastDateOfPrevMonth = getLastDateOfMonth(prevMonth),
-          lastDateNumberOfPrevMonth = getDateNumber(lastDateOfPrevMonth)
+          lastDateNumberOfPrevMonth = getDayOfMonthNumber(lastDateOfPrevMonth)
 
     //Крайние даты открытого месяца
     const firstDateOfMonth = getFirstDateOfMonth(openMonthDate),
@@ -195,7 +197,7 @@ const DateTable = ({openMonthDate, selectedDate, setSelectedDate, cellContentLay
     
     //Кол-во каждого месяца
     let prevMonthDaysCount = dayOfWeekFirstDayOfMonth ? dayOfWeekFirstDayOfMonth - 1 : 6,
-        openMontDaysCount = getDateNumber(lastDateOfMonth),
+        openMontDaysCount = getDayOfMonthNumber(lastDateOfMonth),
         nextMonthDaysCount = dayOfWeekLastDayOfMonth ? 8 - dayOfWeekLastDayOfMonth : 0
 
 
@@ -224,27 +226,29 @@ const DateTable = ({openMonthDate, selectedDate, setSelectedDate, cellContentLay
     </div>)
 }
 
-export const SingleDatePicker = ({className = '',
-                                  modifiers = {},
-                                  openDate = new Date(),
-                                  value = null,
-                                  cellContentLayout = null,
-                                  navContentLayout = null,
-                                  arrowContent = null,
-                                  beforeChangeMonth = null,
-                                  afterChangeMonth = null,
-                                  beforeChangeYear = null,
-                                  afterChangeYear = null,
-                                  beforeCellClick = null,
-                                  afterCellClick = null
-}:SingleDataPickerProps) => {
+
+export default function SingleDatePicker({
+                                             className = '',
+                                             modifiers = {},
+                                             openDate = new Date(),
+                                             value,
+                                             cellContentLayout,
+                                             navContentLayout,
+                                             arrowContent,
+                                             beforeChangeMonth,
+                                             afterChangeMonth,
+                                             beforeChangeYear,
+                                             afterChangeYear,
+                                             beforeCellClick,
+                                             afterCellClick
+                                         }:SingleDataPickerProps) {
 
     const [selectedDate, setSelectedDate] = useState(value),
           [openMonthDate, setOpenMonthDate] = useState(openDate)
-    
+
     const blockClasses = blockClassesConcat(block(), modifiers, className)
     
-    return (<div className={blockClasses}>
+    return (<div className={blockClasses} >
 
         <div className={block('header')}>
             {Navigation({openMonthDate, setOpenMonthDate, selectedDate, arrowContent, navContentLayout, setSelectedDate, beforeChangeMonth, afterChangeMonth, beforeChangeYear, afterChangeYear})}

@@ -1,7 +1,6 @@
 .single-date-picker {
   display: inline-flex;
   flex-direction: column;
-  box-shadow: 0 5px 30px rgba(0,0,0,.3);
 
 
   //Навигация + дни недели
@@ -107,11 +106,13 @@
 
   //Ячейка
   &__date-cell {
+    @borderSize: 2px;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
-    @size: 25px;
+    @size: 25px - @borderSize * 2;
     width: @size;
     height: @size;
 
@@ -120,9 +121,11 @@
     font-size: 12px;
     cursor: pointer;
 
+    border: 2px solid transparent;
+
     &:hover:not(&_selected) {
-      border: 2px solid silver;
       border-radius: 50%;
+      border-color: silver;
     }
 
     &_prev, &_next {
