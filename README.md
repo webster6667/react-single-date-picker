@@ -1,5 +1,5 @@
 <p align="center" style="text-align:center">
-    <img src="./illustration.svg" alt="illustration" width="100"/>
+    <img src="https://cdn.jsdelivr.net/npm/react-single-date-picker/illustration.svg" alt="illustration" width="100"/>
 </p>
 
 # react-single-date-picker
@@ -16,7 +16,7 @@ npm i react-single-date-picker
 
 ## Use
 ```typescript jsx
-import {SingleDatePicker} from 'react-single-date-picker'
+import SingleDatePicker from 'react-single-date-picker'
 
 export default function () {
     
