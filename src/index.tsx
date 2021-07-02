@@ -38,7 +38,7 @@ const Arrow: FC<{duration: typeof arrowDirection, onClick, children}> = ({durati
     </div>)
 }
 
-const DayOfWeekList: FC<{dayOfWeekArray?: string[]}> = ({dayOfWeekArray = ['П', 'В', 'С', 'Ч', 'П', 'С', 'В']}) => {
+const DayOfWeekList: FC<{dayOfWeekArray?: string[]}> = ({dayOfWeekArray}) => {
 
     const dayOfWeekList = dayOfWeekArray.map((item, key) => {
         return (<span className={block('day-of-week')} key={key}>
@@ -51,10 +51,10 @@ const DayOfWeekList: FC<{dayOfWeekArray?: string[]}> = ({dayOfWeekArray = ['П',
     </div>)
 }
 
-const Navigation = ({openMonthDate, setOpenMonthDate, selectedDate, setSelectedDate, arrowContent, navContentLayout, beforeChangeMonth, afterChangeMonth, beforeChangeYear, afterChangeYear}:NavigationProps) => {
+const Navigation = ({monthNamesArray, openMonthDate, setOpenMonthDate, selectedDate, setSelectedDate, arrowContent, navContentLayout, beforeChangeMonth, afterChangeMonth, beforeChangeYear, afterChangeYear}:NavigationProps) => {
 
     const openMonthIndex = openMonthDate.getMonth(),
-          openMonthName = getMonthNameByMonthIndex(openMonthIndex),
+          openMonthName = getMonthNameByMonthIndex(openMonthIndex, monthNamesArray),
           openMontYearNumber = openMonthDate.getFullYear(),
           navHookData = {openMonthDate, setOpenMonthDate, openMonthName, openMontYearNumber, selectedDate, setSelectedDate},
           changeMonthAction = async (duration: typeof moveDirection) => {
@@ -232,6 +232,8 @@ export default function SingleDatePicker({
                                              modifiers = {},
                                              openDate = new Date(),
                                              value,
+                                             monthNamesArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                             dayOfWeekArray = ['M', 'T', 'W', 'T', 'F', 'ST', 'SN'],
                                              cellContentLayout,
                                              navContentLayout,
                                              arrowContent,
@@ -251,8 +253,8 @@ export default function SingleDatePicker({
     return (<div className={blockClasses} >
 
         <div className={block('header')}>
-            {Navigation({openMonthDate, setOpenMonthDate, selectedDate, arrowContent, navContentLayout, setSelectedDate, beforeChangeMonth, afterChangeMonth, beforeChangeYear, afterChangeYear})}
-            <DayOfWeekList />
+            {Navigation({monthNamesArray, openMonthDate, setOpenMonthDate, selectedDate, arrowContent, navContentLayout, setSelectedDate, beforeChangeMonth, afterChangeMonth, beforeChangeYear, afterChangeYear})}
+            {DayOfWeekList({dayOfWeekArray})}
         </div>
 
 

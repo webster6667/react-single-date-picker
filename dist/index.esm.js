@@ -65,8 +65,7 @@ var Arrow = function Arrow(_ref) {
 };
 
 var DayOfWeekList = function DayOfWeekList(_ref2) {
-  var _ref2$dayOfWeekArray = _ref2.dayOfWeekArray,
-      dayOfWeekArray = _ref2$dayOfWeekArray === void 0 ? ['П', 'В', 'С', 'Ч', 'П', 'С', 'В'] : _ref2$dayOfWeekArray;
+  var dayOfWeekArray = _ref2.dayOfWeekArray;
   var dayOfWeekList = dayOfWeekArray.map(function (item, key) {
     return /*#__PURE__*/React.createElement("span", {
       className: block('day-of-week'),
@@ -79,7 +78,8 @@ var DayOfWeekList = function DayOfWeekList(_ref2) {
 };
 
 var Navigation = function Navigation(_ref3) {
-  var openMonthDate = _ref3.openMonthDate,
+  var monthNamesArray = _ref3.monthNamesArray,
+      openMonthDate = _ref3.openMonthDate,
       setOpenMonthDate = _ref3.setOpenMonthDate,
       selectedDate = _ref3.selectedDate,
       setSelectedDate = _ref3.setSelectedDate,
@@ -91,7 +91,7 @@ var Navigation = function Navigation(_ref3) {
       afterChangeYear = _ref3.afterChangeYear;
 
   var openMonthIndex = openMonthDate.getMonth(),
-      openMonthName = getMonthNameByMonthIndex(openMonthIndex),
+      openMonthName = getMonthNameByMonthIndex(openMonthIndex, monthNamesArray),
       openMontYearNumber = openMonthDate.getFullYear(),
       navHookData = {
     openMonthDate: openMonthDate,
@@ -318,6 +318,10 @@ function SingleDatePicker(_ref7) {
       _ref7$openDate = _ref7.openDate,
       openDate = _ref7$openDate === void 0 ? new Date() : _ref7$openDate,
       value = _ref7.value,
+      _ref7$monthNamesArray = _ref7.monthNamesArray,
+      monthNamesArray = _ref7$monthNamesArray === void 0 ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] : _ref7$monthNamesArray,
+      _ref7$dayOfWeekArray = _ref7.dayOfWeekArray,
+      dayOfWeekArray = _ref7$dayOfWeekArray === void 0 ? ['M', 'T', 'W', 'T', 'F', 'ST', 'SN'] : _ref7$dayOfWeekArray,
       cellContentLayout = _ref7.cellContentLayout,
       navContentLayout = _ref7.navContentLayout,
       arrowContent = _ref7.arrowContent,
@@ -343,6 +347,7 @@ function SingleDatePicker(_ref7) {
   }, /*#__PURE__*/React.createElement("div", {
     className: block('header')
   }, Navigation({
+    monthNamesArray: monthNamesArray,
     openMonthDate: openMonthDate,
     setOpenMonthDate: setOpenMonthDate,
     selectedDate: selectedDate,
@@ -353,7 +358,9 @@ function SingleDatePicker(_ref7) {
     afterChangeMonth: afterChangeMonth,
     beforeChangeYear: beforeChangeYear,
     afterChangeYear: afterChangeYear
-  }), /*#__PURE__*/React.createElement(DayOfWeekList, null)), DateTable({
+  }), DayOfWeekList({
+    dayOfWeekArray: dayOfWeekArray
+  })), DateTable({
     openMonthDate: openMonthDate,
     selectedDate: selectedDate,
     setSelectedDate: setSelectedDate,

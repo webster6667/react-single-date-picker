@@ -21,6 +21,7 @@ export interface SetDateProps {
     (setFormFunc: (date: Date) => Date): any;
 }
 export interface NavigationProps {
+    monthNamesArray: string[];
     openMonthDate: Date;
     setOpenMonthDate: SetDateProps;
     selectedDate: Date | null;
@@ -47,6 +48,8 @@ export interface SingleDataPickerProps {
     };
     openDate?: Date;
     value?: Date | null;
+    dayOfWeekArray?: string[];
+    monthNamesArray?: string[];
     cellContentLayout?(hookData: HookProps): ReactElement;
     navContentLayout?(navHookData: NavHookProps): ReactElement;
     arrowContent?: ReactElement | null;
